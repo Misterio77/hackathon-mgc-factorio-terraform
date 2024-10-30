@@ -9,10 +9,6 @@
       "virtio_blk"
     ];
     kernelModules = [ "kvm-intel" ];
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
   };
 
   networking.useDHCP = lib.mkDefault true;
@@ -24,8 +20,12 @@
     content = {
       type = "gpt";
       partitions = {
+        boot = {
+          size = "1M";
+          type = "EF02";
+        };
         esp = {
-          size = "256M";
+          size = "512M";
           type = "EF00";
           content = {
             type = "filesystem";

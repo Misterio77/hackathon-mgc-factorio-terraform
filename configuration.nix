@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./disks.nix
     ./hardware-configuration.nix
   ];
   networking.hostName = "factorio-hackathon";
