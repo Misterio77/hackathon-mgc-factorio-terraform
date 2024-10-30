@@ -49,5 +49,4 @@ module "deploy" {
 
   install_user = "debian"
   install_ssh_key = nonsensitive(tls_private_key.key.private_key_openssh)
-  target_user = "nixos"
 }
