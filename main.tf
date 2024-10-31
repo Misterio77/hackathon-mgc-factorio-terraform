@@ -39,14 +39,6 @@ resource "mgc_virtual_machine_instances" "factorio_server" {
   ssh_key_name = mgc_ssh_keys.key.name
 }
 
-module "deploy" {
-  source = "github.com/nix-community/nixos-anywhere//terraform/all-in-one"
-  nixos_system_attr = ".#nixosConfigurations.factorio-server.config.system.build.toplevel"
-  nixos_partitioner_attr = ".#nixosConfigurations.factorio-server.config.system.build.diskoScript"
-
-  target_host = mgc_virtual_machine_instances.factorio_server.network.public_address
-  instance_id = mgc_virtual_machine_instances.factorio_server.id
-
-  install_user = "debian"
-  install_ssh_key = nonsensitive(tls_private_key.key.private_key_openssh)
+output "ip" {
+  value = mgc_virtual_machine_instances.factorio_server.network.public_address
 }
