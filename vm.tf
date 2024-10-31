@@ -1,11 +1,11 @@
 resource "mgc_ssh_keys" "key" {
   name = "chave-do-gabriel"
-  # Altere para a sua chave publica
   key = file("${path.module}/ssh.pub")
 }
 
 resource "mgc_virtual_machine_instances" "factorio_server" {
-  name = "factorio-server-tutorial"
+  name = "factorio"
+  name_is_prefix = true
   machine_type = {
     name = "BV2-8-40"
   }
