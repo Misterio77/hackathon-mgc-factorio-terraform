@@ -1,4 +1,4 @@
-{ lib, modulesPath, ... }: {
+{modulesPath, ...}: {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   boot = {
@@ -11,9 +11,7 @@
     kernelModules = [ "kvm-intel" ];
   };
 
-  networking.useDHCP = lib.mkDefault true;
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
+  # Nossas partições
   disko.devices.disk.main = {
     device = "/dev/vda";
     type = "disk";
