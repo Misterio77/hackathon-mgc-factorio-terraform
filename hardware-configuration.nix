@@ -1,12 +1,9 @@
 {modulesPath, ...}: {
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
   boot = {
-    initrd.availableKernelModules = [
-      "ata_piix"
-      "uhci_hcd"
-    ];
-    kernelModules = [ "kvm-intel" ];
+    initrd.availableKernelModules = ["ata_piix" "uhci_hcd"];
+    kernelModules = ["kvm-intel"];
   };
 
   # Nossas partições

@@ -5,7 +5,11 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, disko, ... }: {
+  outputs = {
+    nixpkgs,
+    disko,
+    ...
+  }: {
     nixosConfigurations.factorio-server = nixpkgs.lib.nixosSystem {
       modules = [./configuration.nix disko.nixosModules.disko];
     };

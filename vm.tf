@@ -1,10 +1,10 @@
 resource "mgc_ssh_keys" "key" {
   name = "chave-do-gabriel"
-  key = file("${path.module}/ssh.pub")
+  key  = file("${path.module}/ssh.pub")
 }
 
 resource "mgc_virtual_machine_instances" "factorio_server" {
-  name = "factorio"
+  name           = "factorio"
   name_is_prefix = true
   machine_type = {
     name = "BV2-8-40"
@@ -20,7 +20,6 @@ resource "mgc_virtual_machine_instances" "factorio_server" {
       }]
     }
   }
-  # Passar nossa chave
   ssh_key_name = mgc_ssh_keys.key.name
 }
 
