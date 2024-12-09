@@ -18,6 +18,46 @@ resource "mgc_ssh_keys" "key" {
   key  = file("${path.module}/ssh.pub")
 }
 
+resource "mgc_network_security_groups" "factorio_server" {
+  name = "factorio"
+}
+resource "mgc_network_security_groups_rules" "incoming_ssh_ipv4" {
+  direction = "ingress"
+  port_range_min = 22
+  port_range_max = 22
+  protocol = "tcp"
+  ethertype = "IPv4"
+  remote_ip_prefix = "0.0.0.0/0"
+  security_group_id = mgc_network_security_groups.factorio_server.id
+}
+resource "mgc_network_security_groups_rules" "incoming_ssh_ipv6" {
+  direction = "ingress"
+  port_range_min = 22
+  port_range_max = 22
+  protocol = "tcp"
+  ethertype = "IPv6"
+  remote_ip_prefix = "::/0"
+  security_group_id = mgc_network_security_groups.factorio_server.id
+}
+resource "mgc_network_security_groups_rules" "incoming_factorio_ipv4" {
+  direction = "ingress"
+  port_range_min = 34197
+  port_range_max = 34197
+  protocol = "udp"
+  ethertype = "IPv4"
+  remote_ip_prefix = "0.0.0.0/0"
+  security_group_id = mgc_network_security_groups.factorio_server.id
+}
+resource "mgc_network_security_groups_rules" "incoming_factorio_ipv6" {
+  direction = "ingress"
+  port_range_min = 34197
+  port_range_max = 34197
+  protocol = "udp"
+  ethertype = "IPv6"
+  remote_ip_prefix = "::/0"
+  security_group_id = mgc_network_security_groups.factorio_server.id
+}
+
 resource "mgc_virtual_machine_instances" "factorio_server" {
   name = "factorio"
   name_is_prefix = true
@@ -30,9 +70,7 @@ resource "mgc_virtual_machine_instances" "factorio_server" {
   network = {
     associate_public_ip = true
     interface = {
-      security_groups = [{
-        id = "4aa1a237-2d57-439b-bf6a-177ddbace4cb" # grupo criado previamente pelo gabriel
-      }]
+      security_groups = [{ id = mgc_network_security_groups.factorio_server.id }]
     }
   }
   ssh_key_name = mgc_ssh_keys.key.name
