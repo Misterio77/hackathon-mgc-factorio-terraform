@@ -1,4 +1,4 @@
-{lib, ...}: {
+{lib, specialArgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -28,8 +28,6 @@
   };
 
   users.users.root = {
-    openssh.authorizedKeys.keys = [
-      (lib.trim (lib.readFile ./ssh.pub))
-    ];
+    openssh.authorizedKeys.keys = lib.optional (specialArgs ? ssh_key) specialArgs.ssh_key;
   };
 }
