@@ -85,7 +85,7 @@ output "ip" {
 }
 
 module "deploy" {
-  source                 = "github.com/nix-community/nixos-anywhere//terraform/all-in-one"
+  source                 = "github.com/nix-community/nixos-anywhere//terraform/all-in-one?ref=77e6a4e14baa93a29952ea9f0e4a59a29cca09e9" # 1.8.0
   nixos_system_attr      = ".#nixosConfigurations.factorio-server.config.system.build.toplevel"
   nixos_partitioner_attr = ".#nixosConfigurations.factorio-server.config.system.build.diskoScript"
   debug_logging          = true
