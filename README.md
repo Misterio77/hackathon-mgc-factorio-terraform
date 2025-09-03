@@ -11,7 +11,7 @@ Leia o write-up completo em TODO
 
 ## Como funciona
 
-Esse repositório contém uma configuração de NixOS (`configuration.nix`, `hardware-configuration.nix`) exportada num flake (`flake.nix`), e um manifesto terraform (`main.tf`) para subir uma VM rodando essa configuração. Isso é feito utilizando [nixos-anywhere](https://github.com/nix-community/nixos-anywhere).
+Esse repositório contém uma configuração de NixOS (`configuration.nix`, `hardware-configuration.nix`) exportada num flake (`flake.nix`), e um código terraform (`main.tf`, `vm.tf`, `ip.tf`, `firewall.tf`, `nixos.tf`) para subir uma VM rodando essa configuração. Isso é feito utilizando [nixos-anywhere](https://github.com/nix-community/nixos-anywhere).
 
 A chave SSH usada para aplicar a configuração é gerada pelo próprio terraform e passada para o nixos-anywhere. Você também pode incluir sua própria chave em `configuration.nix`.
 
