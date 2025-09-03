@@ -10,8 +10,15 @@ terraform {
   }
 }
 
+variable "mgc_api_key" {
+  description = "A MGC API key to use with the provider."
+  sensitive = true
+  type = string
+}
+
 provider "mgc" {
   region = "br-se1"
+  api_key = var.mgc_api_key
 }
 
 resource "tls_private_key" "ssh" {
